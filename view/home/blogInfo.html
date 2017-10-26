@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人博客</title>
+    <link rel="stylesheet" href="./public/css/reset.css">
+    <link rel="stylesheet" href="./public/css/main.css">
+    <link rel="stylesheet" href="./public/css/liuyan.css">
+    <script type="text/javascript" src="./public/js/jquery-3.2.0.js"></script>
+    <script type="text/javascript" src="./public/js/main.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        <div class="logo">
+            <img src="./public/img/logo.png" alt="">
+        </div>
+        <div class="top-nav">
+            <ul class="top-nav-ul">
+                <li>
+                    <a href="index.php" class="mouseOn">首页</a>
+                    <span class="top-nav-out">Home</span>
+                </li>
+                <li>
+                    <a href="#" class="mouseOn">关于我</a>
+                    <span class="top-nav-out">About</span>
+                </li>
+                <li>
+                    <a href="#" class="mouseOn">慢生活</a>
+                    <span class="top-nav-out">Life</span>
+                </li>
+                <li>
+                    <a href="#" class="mouseOn">模板分享</a>
+                    <span class="top-nav-out">Share</span>
+                </li>
+                <li>
+                    <a href="index.php?c=Home&a=study" class="mouseOn">学无止境</a>
+                    <span class="top-nav-out">Learn</span>
+                </li>
+                <li>
+                    <a href="liuyan.html" class="mouseOn">留言</a>
+                    <span class="top-nav-out">Saying</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="content">
+            <div class="read-about-box">
+                <h4 class="read-about">
+                    <?php echo $blogInfo['title']; ?>
+                    <span><?php echo $blogInfo['createtime']; ?></span>
+                </h4>
+                <div class="read-content"> <?php echo $blogInfo['content']; ?></div>
+                <img src="./public/img/about.png" alt="" style="margin-top: 30px">
+                <p class="about">
+                <?php foreach ($brotherBlog as $key => $value) { if($blogInfo['id'] != $value['id']){ ?>
+
+                    <a href="index.php?c=Home&a=getBlogInfo&id=<?php echo $value['id'];?>"><?php echo $value['title'];?></a>
+                <?php } }?>
+                </p>
+                <div class="gbko">
+                    <div class="release">
+                        <div class="release-head">
+                            <form action="index.php?c=Home&a=comment" method="post">
+                            <?php if($_SESSION['me']['name']){ ?>
+                            <div class="release-head-login">
+                                <a href=""><?php echo $_SESSION['me']['name'];?></a>
+                                </div>
+                            <?php } else{ ?>
+                             <div class="release-head-login">
+                            <a href="index.php?c=UserCenter&a=login">登录</a>
+                            </div>
+                            <?php } ?>
+                           
+                            <div class="gbko-input" >
+                           
+                                <textarea  placeholder="来说两句吧..." name="content"></textarea>
+                                <input type="hidden" name="blog_id" value="<?php echo $blogInfo['id']?>">
+                            </div>
+                            <div class="gbko-btn">
+                                <ul>
+                                    <li><img src="./public/img/small.png" alt=""></li>
+                                    <li><img src="./public/img/small2.png" alt=""></li>
+                                </ul>
+                                 <a href="index.php?c=UserCenter&a=logout">注销</a>
+                                <input type="submit" class="btn" value="">
+                            
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="comment-title">
+                        <span>评论</span>
+                        <p><i>4202</i>人参与, <i><?php echo $count;?></i>条评论</p>
+                    </div>
+                    <p class="comment-news">最新评论</p>
+                    <div class="comment-content-box">
+                        <ul>
+                        <?php foreach ($comment as $key => $value) { ?>
+                            <li>
+                                <img src="<?php echo $value['commenter']['image'];?>" alt="">
+                                <div class="comment-right">
+                                    <p class="comment-right-title">
+                                        <span><?php echo $value['commenter']['name'];?></span>
+                                        <span class="comment-time"><?php echo $value['createdate'];?></span>
+                                    </p>
+                                    <div class="commentCon"><?php echo $value['content'];?></div>
+                                    <p class="comment-right-foot"><a href="#">回复</a></p>
+                                </div>
+                            </li>
+                        <?php } ?>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">Design by DanceSmile 蜀ICP备11002373号-1</div>
+</div>
+</body>
+</html>

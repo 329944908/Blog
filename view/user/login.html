@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录</title>
+</head>
+<body>
+	<form action="index.php?c=UserCenter&a=doLogin" method="post">
+		邮  箱：<input type="text" name="email"><br>
+		密  码：<input type="text" name="password"><br>
+		验证码: <input type="text" name="verifyCode">
+		<img src="index.php?c=UserCenter&a=verifyCode" class="verify"></br>
+		<a href="javascript:;" class="alterVerify">换一张</a></br>
+		        <input type="submit" name="" value="登录">
+	</form>
+	<a href="index.php?c=UserCenter&a=reg">注册</a>
+	<script src="http://code.jquery.com/jquery-3.2.1.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$('.verify').click(function(){
+			newsrc="index.php?c=UserCenter&a=verifyCode&v="+Math.random();
+			$('.verify').attr('src',newsrc);
+		})
+		$('.alterVerify').click(function(){
+			newsrc="index.php?c=UserCenter&a=verifyCode&v="+Math.random();
+			$('.verify').attr('src',newsrc);
+		})
+	})
+	</script>
+</body>
+</html>
