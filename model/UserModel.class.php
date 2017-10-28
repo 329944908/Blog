@@ -2,7 +2,7 @@
 	class UserModel{
 		public $mysqli;
 		public function __construct(){
-			$this->mysqli = new mysqli("localhost","root","","blog");
+			$this->mysqli = new mysqli("localhost","root","123456","blog");
 			$this->mysqli->query('set names utf8');
 		}
 		public function addUser($name,$email,$password,$image,$status=0){
@@ -13,13 +13,13 @@
 		public function getUserInfoByEmail($email){
 			$sql = "select * from user where email = '{$email}'";
 			$res = $this->mysqli->query($sql);
-			$userInfo = $res->fetch_all(MYSQL_ASSOC);
+			$userInfo = $res->fetch_all(MYSQLI_ASSOC);
 			return isset($userInfo[0]) ? $userInfo[0]:array();
 		}
 		public function getUserInfoById($id){
 			$sql = "select * from user where id = {$id}";
 			$res = $this->mysqli->query($sql);
-			$userInfo = $res->fetch_all(MYSQL_ASSOC);
+			$userInfo = $res->fetch_all(MYSQLI_ASSOC);
 			return isset($userInfo[0]) ? $userInfo[0]:array();
 		}
 	}

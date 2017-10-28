@@ -2,7 +2,7 @@
 	class BlogModel{
 		public $mysqli;
 		function __construct(){
-			$this->mysqli = new mysqli("localhost","root","","blog");
+			$this->mysqli = new mysqli("localhost","root","123456","blog");
 			$this->mysqli->query('set names utf8');
 		}
 		public function add($data){
@@ -13,13 +13,13 @@
 		function getBlogLists($offset=0,$pageSize=20,$order ='id asc',$where='1'){
 			$sql = "select * from blog where {$where} order by {$order} limit {$offset},{$pageSize}";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return $data;
 		}
 		function getBlogInfo($id){
 			$sql = "select * from blog where id = {$id}";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return isset($data[0]) ? $data[0] : array();
 		}
 	}

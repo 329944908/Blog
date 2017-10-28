@@ -72,4 +72,7 @@
 				die('error');
 			}
 		}
+		public function back(){
+		  echo "<script>alert('随便写点什么');history.go(-2);</script>";  
+		}
 	}

@@ -26,7 +26,7 @@
 			if($userInfo){
 				if($password == $userInfo['password']){
 					if($verifyCode ==$_SESSION['verifyCode']){
-						header('location:index.php?c=Home&a=lists');
+						echo "<script>history.go(-1);</script>";  
 					}else{
 						echo "验证码错误";
 						header('Refresh:3,Url=index.php?c=UserCenter&a=login');
@@ -38,12 +38,11 @@
 			}else{
 				echo "该用户不存在";
 				header('Refresh:3,Url=index.php?c=UserCenter&a=reg');
-			}
-			
+			}	
 		}
 		public function logout(){
 			unset($_SESSION['me']);
-			header("Refresh:3,Url=index.php?c=UserCenter&a=login");
+		    echo "<script>history.go(-1);</script>";  
 		}
 		public function verifyCode(){
 			header("Content-Type:image/png");
@@ -56,4 +55,5 @@
 			imagepng($image);
 			imagedestroy($image);
 		}
+
 	}

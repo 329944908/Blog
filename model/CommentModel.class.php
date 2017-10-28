@@ -2,7 +2,7 @@
 	class CommentModel{
 		public $mysqli;
 		public function __construct(){
-			$this->mysqli = new mysqli("localhost","root","","blog");
+			$this->mysqli = new mysqli("localhost","root","123456","blog");
 			$this->mysqli->query('set names utf8');
 		}
 		function add($user_id,$blog_id,$parent_id=0,$content=''){
@@ -14,13 +14,13 @@
 		function getComments($blog_id){
 			$sql = "select * from comment where blog_id ={$blog_id}";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return $data;
 		}
 		function count($blog_id){
 			$sql = "select count(*) as num from comment where blog_id ={$blog_id}";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return isset($data[0]['num']) ? $data[0]['num'] : 0;
 		}
 	}

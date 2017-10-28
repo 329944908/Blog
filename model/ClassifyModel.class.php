@@ -2,13 +2,13 @@
 	class ClassifyModel{
 		public $mysqli;
 		public function __construct(){
-			$this->mysqli = new mysqli("localhost","root","","blog");
+			$this->mysqli = new mysqli("localhost","root","123456","blog");
 			$this->mysqli->query('set names utf8');
 		}
 		public function getLists(){
 			$sql = "select * from classify";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return $data;
 		}
 		public function audit($status,$id){
@@ -18,7 +18,7 @@
 		public function getClassifyByID($id){
 			$sql = "select * from classify where id= {$id}";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return isset($data[0]) ? $data[0] :array();
 		}
 		public function edit($name,$parent_id,$id){
@@ -29,7 +29,7 @@
 		public function getParentLists($parent_id = 0){
 			$sql = "select * from classify where parent_id ={$parent_id}";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			return $data;
 		}
 		public function add($name,$parent_id){
@@ -39,11 +39,11 @@
 		public function getAllClassify($parent_id= 0){
 			$sql = "select * from classify where parent_id = {$parent_id}";
 			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQL_ASSOC);
+			$data = $res->fetch_all(MYSQLI_ASSOC);
 			foreach ($data as $key => $value) {
 				$sqlChild = "select * from classify where parent_id= {$value['id']}";
 				$resChild = $this->mysqli->query($sqlChild);
-				$child = $resChild->fetch_all(MYSQL_ASSOC);
+				$child = $resChild->fetch_all(MYSQLI_ASSOC);
 				$data[$key]['child'] = $child;
 			}
 			return $data;
