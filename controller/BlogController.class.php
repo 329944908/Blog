@@ -6,7 +6,7 @@
 			include "./view/blog/add.html";
 		}
 		public function doAdd(){
-			$upload =L("Upload");
+			$upload =L("upload");
 			$image = $upload->run('image');
 			$content = $_POST['content'];
 			$classify_id = $_POST['classify_id'];
@@ -20,7 +20,7 @@
 			$blogModel = new BlogModel();
 			$status = $blogModel->add($data);
 			if ($status) {
-				// header('Refresh:3,Url=index.php?c=Blog&a=blogLists');
+				header('Refresh:3,Url=index.php?c=Home&a=lists');
 				echo "发布成功，3秒后跳转";
 			}	
 		}

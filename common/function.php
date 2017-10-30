@@ -1,8 +1,8 @@
 <?php
 	function __autoload($class){
-		if(strpos($class, 'Controller')){
+		if(strpos($class, 'Controller')!==false){
 			$dir = 'controller';
-		}elseif (strpos($class, 'Model')) {
+		}elseif (strpos($class, 'Model')!==false) {
 			$dir = 'model';
 		}else{
 			die($class.'不存在');

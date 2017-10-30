@@ -1,16 +1,10 @@
 <?php
-	class ClassifyModel{
-		public $mysqli;
-		public function __construct(){
-			$this->mysqli = new mysqli("localhost","root","123456","blog");
-			$this->mysqli->query('set names utf8');
-		}
+	class ClassifyModel extends Model{
+		public $table="classify";
 		public function getLists(){
-			$sql = "select * from classify";
-			$res = $this->mysqli->query($sql);
-			$data = $res->fetch_all(MYSQLI_ASSOC);
-			return $data;
+			$this->getLists($offset,$pageSize,$order,$where);
 		}
+
 		public function audit($status,$id){
 			$sql = "update  classify set status={$status} where id = {$id}";
 			$this->mysqli->query($sql);

@@ -4,7 +4,7 @@
 			include "./view/user/reg.html";
 		}
 		public function doReg(){
-			$upload =L("Upload");
+			$upload =L("upload");
 			$image = $upload->run('image');
 			$name = $_POST['name'];
 			$email = $_POST['email'];
@@ -26,7 +26,7 @@
 			if($userInfo){
 				if($password == $userInfo['password']){
 					if($verifyCode ==$_SESSION['verifyCode']){
-						echo "<script>history.go(-1);</script>";  
+						header('Refresh:3,Url=index.php?c=Home&a=lists'); 
 					}else{
 						echo "验证码错误";
 						header('Refresh:3,Url=index.php?c=UserCenter&a=login');

@@ -1,10 +1,6 @@
 <?php
-	class CommentModel{
-		public $mysqli;
-		public function __construct(){
-			$this->mysqli = new mysqli("localhost","root","123456","blog");
-			$this->mysqli->query('set names utf8');
-		}
+	class CommentModel extends Model{
+		public $table="comment";
 		function add($user_id,$blog_id,$parent_id=0,$content=''){
 			$createtime = date('Y年m月d日 H时i分');
 			$sql = "insert into comment(user_id,blog_id,parent_id,content,createtime) values({$user_id},{$blog_id},{$parent_id},'{$content}','{$createtime}')";
